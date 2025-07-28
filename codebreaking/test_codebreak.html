@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codebreak Algorithm Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-case { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 8px; }
+        .result { margin: 10px 0; padding: 10px; background: #f0f0f0; border-radius: 4px; }
+        .correct { background: #d4edda; color: #155724; }
+        .incorrect { background: #f8d7da; color: #721c24; }
+        .peg { display: inline-block; width: 30px; height: 30px; border-radius: 50%; margin: 2px; border: 2px solid #333; }
+        .red { background: #e53e3e; }
+        .blue { background: #3182ce; }
+        .green { background: #38a169; }
+        .yellow { background: #ffd700; }
+        .purple { background: #805ad5; }
+        .orange { background: #dd6b20; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Codebreak Algorithm Test</h1>
+    
+    <div id="test-results"></div>
+    
+    <button onclick="runTests()">Run All Tests</button>
+    <button onclick="testSpecificCase()">Test Specific Case</button>
+    
+    <script src="codebreak.js"></script>
+    <script>
+        // Create a test wrapper that uses the real game's getFeedback method
+        let testGame = null;
+        
+        function createTestGame() {
+            // Create a minimal game instance by overriding the constructor behavior
+            const originalInit = CodebreakGame.prototype.init;
+            const originalStartTimer = CodebreakGame.prototype.startTimer;
+            const originalUpdateTimer = CodebreakGame.prototype.updateTimer;
+            
+            // Temporarily override methods to prevent DOM access
+            CodebreakGame.prototype.init = function() {};
+            CodebreakGame.prototype.startTimer = function() {};
+            CodebreakGame.prototype.updateTimer = function() {};
+            
+            // Create the game instance
+            testGame = new CodebreakGame();
+            
+            // Restore original methods
+            CodebreakGame.prototype.init = originalInit;
+            CodebreakGame.prototype.startTimer = originalStartTimer;
+            CodebreakGame.prototype.updateTimer = originalUpdateTimer;
+        }
+        
+        function getFeedback(secretCode, guess) {
+            if (!testGame) {
+                createTestGame();
+            }
+            testGame.secretCode = secretCode;
+            return testGame.getFeedback(guess);
+        }
+        
+        function displayPegs(colors) {
+            return colors.map(color => `<div class="peg ${color}"></div>`).join('');
+        }
+        
+        function runTests() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<h2>Test Results:</h2>';
+            
+            const testCases = [
+                {
+                    name: "Perfect Match",
+                    secret: ['red', 'blue', 'green', 'yellow'],
+                    guess: ['red', 'blue', 'green', 'yellow'],
+                    expected: { red: 4, white: 0 }
+                },
+                {
+                    name: "All Wrong Position",
+                    secret: ['red', 'blue', 'green', 'yellow'],
+                    guess: ['blue', 'green', 'yellow', 'red'],
+                    expected: { red: 0, white: 4 }
+                },
+                {
+                    name: "Mixed Results",
+                    secret: ['red', 'blue', 'green', 'yellow'],
+                    guess: ['red', 'green', 'blue', 'purple'],
+                    expected: { red: 1, white: 2 }
+                },
+                {
+                    name: "No Matches",
+                    secret: ['red', 'blue', 'green', 'yellow'],
+                    guess: ['purple', 'orange', 'purple', 'orange'],
+                    expected: { red: 0, white: 0 }
+                },
+                {
+                    name: "Duplicate Colors in Secret",
+                    secret: ['red', 'red', 'blue', 'green'],
+                    guess: ['red', 'blue', 'red', 'yellow'],
+                    expected: { red: 1, white: 2 }
+                },
+                {
+                    name: "Duplicate Colors in Guess",
+                    secret: ['red', 'blue', 'green', 'yellow'],
+                    guess: ['red', 'red', 'blue', 'green'],
+                    expected: { red: 1, white: 2 }
+                }
+            ];
+            
+            let passed = 0;
+            let total = testCases.length;
+            
+            testCases.forEach((testCase, index) => {
+                const result = getFeedback(testCase.secret, testCase.guess);
+                const isCorrect = result.red === testCase.expected.red && result.white === testCase.expected.white;
+                
+                if (isCorrect) passed++;
+                
+                const testDiv = document.createElement('div');
+                testDiv.className = `test-case ${isCorrect ? 'correct' : 'incorrect'}`;
+                testDiv.innerHTML = `
+                    <h3>Test ${index + 1}: ${testCase.name}</h3>
+                    <p><strong>Secret:</strong> ${displayPegs(testCase.secret)}</p>
+                    <p><strong>Guess:</strong> ${displayPegs(testCase.guess)}</p>
+                    <p><strong>Expected:</strong> ${testCase.expected.red} red, ${testCase.expected.white} white</p>
+                    <p><strong>Result:</strong> ${result.red} red, ${result.white} white</p>
+                    <p><strong>Status:</strong> ${isCorrect ? '✅ PASS' : '❌ FAIL'}</p>
+                `;
+                results.appendChild(testDiv);
+            });
+            
+            const summary = document.createElement('div');
+            summary.className = `result ${passed === total ? 'correct' : 'incorrect'}`;
+            summary.innerHTML = `<h3>Summary: ${passed}/${total} tests passed</h3>`;
+            results.appendChild(summary);
+        }
+        
+        function testSpecificCase() {
+            const secret = prompt("Enter secret code (comma-separated colors):", "red,blue,green,yellow");
+            const guess = prompt("Enter guess (comma-separated colors):", "red,green,blue,purple");
+            
+            if (secret && guess) {
+                const secretArray = secret.split(',').map(s => s.trim());
+                const guessArray = guess.split(',').map(s => s.trim());
+                
+                const result = getFeedback(secretArray, guessArray);
+                
+                const results = document.getElementById('test-results');
+                results.innerHTML = '<h2>Custom Test Result:</h2>';
+                
+                const testDiv = document.createElement('div');
+                testDiv.className = 'test-case';
+                testDiv.innerHTML = `
+                    <h3>Custom Test</h3>
+                    <p><strong>Secret:</strong> ${displayPegs(secretArray)}</p>
+                    <p><strong>Guess:</strong> ${displayPegs(guessArray)}</p>
+                    <p><strong>Result:</strong> ${result.red} red, ${result.white} white</p>
+                `;
+                results.appendChild(testDiv);
+            }
+        }
+    </script>
+</body>
+</html> 

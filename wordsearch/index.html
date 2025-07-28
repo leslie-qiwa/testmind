@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Search Game</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <h1 class="logo">🧠 Logic Games Hub</h1>
+                <ul class="nav-links">
+                    <li><a href="../index.html">← Back to Dashboard</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="wordsearch" class="section active">
+            <div class="container">
+                <div class="game-header">
+                    <h2>🔍 Word Search</h2>
+                    <button class="back-btn" onclick="window.location.href='../index.html'">← Back to Dashboard</button>
+                </div>
+
+                <div class="game-controls">
+                    <button id="new-wordsearch-btn" onclick="startNewWordSearchGame()">New Game</button>
+                    <div class="game-stats-display">
+                        <span>Words Found: <span id="words-found">0</span>/<span id="total-words">0</span></span>
+                        <span>Time: <span id="wordsearch-timer">00:00</span></span>
+                    </div>
+                </div>
+
+                <div class="wordsearch-game">
+                    <div class="words-to-find" id="words-to-find">
+                        <h3>Find these words:</h3>
+                        <div class="word-list" id="word-list"></div>
+                    </div>
+                    
+                    <div class="grid-container">
+                        <div class="wordsearch-grid" id="wordsearch-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="wordsearch.js"></script>
+</body>
+</html> 

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codebreak - Code Breaking Game</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <h1 class="logo">🧠 Logic Games Hub</h1>
+                <ul class="nav-links">
+                    <li><a href="../index.html">← Back to Dashboard</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="mastermind" class="section active">
+            <div class="container">
+                <div class="game-header">
+                    <h2>🎯 Codebreak</h2>
+                    <button class="back-btn" onclick="window.location.href='../index.html'">← Back to Dashboard</button>
+                </div>
+
+                <div class="game-controls">
+                    <button id="new-game-btn" onclick="startNewCodebreakGame()">New Game</button>
+                    <div class="game-stats-display">
+                        <span>Attempts: <span id="attempts">0</span></span>
+                        <span>Time: <span id="timer">00:00</span></span>
+                    </div>
+                </div>
+
+                <div class="mastermind-game">
+                    <div class="secret-code" id="secret-code">
+                        <div class="peg hidden"></div>
+                        <div class="peg hidden"></div>
+                        <div class="peg hidden"></div>
+                        <div class="peg hidden"></div>
+                    </div>
+
+                    <div class="game-play-area">
+                        <div class="left-panel">
+                            <h3>Choose Colors:</h3>
+                            <div class="color-palette">
+                                <div class="color-option" data-color="red" onclick="selectColor('red')"></div>
+                                <div class="color-option" data-color="blue" onclick="selectColor('blue')"></div>
+                                <div class="color-option" data-color="green" onclick="selectColor('green')"></div>
+                                <div class="color-option" data-color="yellow" onclick="selectColor('yellow')"></div>
+                                <div class="color-option" data-color="purple" onclick="selectColor('purple')"></div>
+                                <div class="color-option" data-color="orange" onclick="selectColor('orange')"></div>
+                            </div>
+                        </div>
+
+                        <div class="right-panel">
+                            <h3>Your Guess:</h3>
+                            <div class="guess-area">
+                                <div class="current-guess" id="current-guess">
+                                    <div class="peg empty" onclick="selectPeg(0)"></div>
+                                    <div class="peg empty" onclick="selectPeg(1)"></div>
+                                    <div class="peg empty" onclick="selectPeg(2)"></div>
+                                    <div class="peg empty" onclick="selectPeg(3)"></div>
+                                </div>
+                                <button id="submit-guess" onclick="submitGuess()" disabled>Submit Guess</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="guesses-history" id="guesses-history"></div>
+                </div>
+
+                <div class="game-info">
+                    <p>Guess the secret 4-color code! After each guess, you'll get feedback:</p>
+                    <ul>
+                        <li>🔴 Red peg = Correct color in correct position</li>
+                        <li>⚪ White peg = Correct color in wrong position</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="codebreak.js"></script>
+</body>
+
+</html>
