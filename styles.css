@@ -85,8 +85,15 @@ main {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Dashboard */
@@ -286,12 +293,29 @@ h2 {
     background: white;
 }
 
-.peg.red { background: #e53e3e; }
-.peg.blue { background: #3182ce; }
-.peg.green { background: #38a169; }
-.peg.yellow { background: #ffd700; }
-.peg.purple { background: #805ad5; }
-.peg.orange { background: #dd6b20; }
+.peg.red {
+    background: #e53e3e;
+}
+
+.peg.blue {
+    background: #3182ce;
+}
+
+.peg.green {
+    background: #38a169;
+}
+
+.peg.yellow {
+    background: #ffd700;
+}
+
+.peg.purple {
+    background: #805ad5;
+}
+
+.peg.orange {
+    background: #dd6b20;
+}
 
 .game-play-area {
     display: grid;
@@ -301,14 +325,16 @@ h2 {
     align-items: start;
 }
 
-.left-panel, .right-panel {
+.left-panel,
+.right-panel {
     background: #f7fafc;
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
 }
 
-.left-panel h3, .right-panel h3 {
+.left-panel h3,
+.right-panel h3 {
     margin-bottom: 1.5rem;
     color: #2d3748;
     font-size: 1.2rem;
@@ -336,12 +362,29 @@ h2 {
     border-color: #2d3748;
 }
 
-.color-option[data-color="red"] { background: #e53e3e; }
-.color-option[data-color="blue"] { background: #3182ce; }
-.color-option[data-color="green"] { background: #38a169; }
-.color-option[data-color="yellow"] { background: #ffd700; }
-.color-option[data-color="purple"] { background: #805ad5; }
-.color-option[data-color="orange"] { background: #dd6b20; }
+.color-option[data-color="red"] {
+    background: #e53e3e;
+}
+
+.color-option[data-color="blue"] {
+    background: #3182ce;
+}
+
+.color-option[data-color="green"] {
+    background: #38a169;
+}
+
+.color-option[data-color="yellow"] {
+    background: #ffd700;
+}
+
+.color-option[data-color="purple"] {
+    background: #805ad5;
+}
+
+.color-option[data-color="orange"] {
+    background: #dd6b20;
+}
 
 .guess-area {
     display: flex;
@@ -378,6 +421,7 @@ h2 {
 
 .guesses-history {
     max-height: 300px;
+    overflow-y: auto;
     padding: 1rem;
     background: #f7fafc;
     border-radius: 15px;
@@ -422,12 +466,13 @@ h2 {
     border: 2px solid #e2e8f0;
 }
 
-.feedback-peg.red { 
-    background: #e53e3e; 
+.feedback-peg.red {
+    background: #e53e3e;
     border-color: #c53030;
 }
-.feedback-peg.white { 
-    background: #f7fafc; 
+
+.feedback-peg.white {
+    background: #f7fafc;
     border-color: #cbd5e0;
 }
 
@@ -528,145 +573,146 @@ h2 {
         gap: 1rem;
         padding: 0.5rem 1rem;
     }
-    
+
     .nav-links {
         gap: 0.5rem;
     }
-    
+
     .nav-links a {
         padding: 0.4rem 0.8rem;
         font-size: 0.9rem;
     }
-    
+
     .container {
         padding: 1rem 0.5rem;
     }
-    
+
     h2 {
         font-size: 2rem;
         margin-bottom: 0.5rem;
     }
-    
+
     .subtitle {
         font-size: 1rem;
         margin-bottom: 2rem;
     }
-    
+
     .games-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .game-card {
         padding: 1.5rem;
         margin: 0 0.5rem;
     }
-    
+
     .game-header {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
     }
-    
+
     .game-header h2 {
         font-size: 1.8rem;
     }
-    
+
     .game-controls {
         flex-direction: column;
         gap: 1rem;
         padding: 1rem;
         margin: 0 0.5rem;
     }
-    
+
     .game-stats-display {
         flex-direction: column;
         gap: 0.5rem;
         text-align: center;
     }
-    
+
     .game-info {
         margin: 0 0.5rem 1.5rem 0.5rem;
         padding: 1rem;
     }
-    
+
     .mastermind-game {
         margin: 0 0.5rem;
         padding: 1.5rem;
     }
-    
+
     .game-play-area {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
-    .left-panel, .right-panel {
+
+    .left-panel,
+    .right-panel {
         padding: 1.5rem;
     }
-    
+
     .color-palette {
         gap: 0.8rem;
     }
-    
+
     .color-option {
         width: 35px;
         height: 35px;
     }
-    
+
     .guess-area {
         flex-direction: column;
         gap: 1rem;
     }
-    
+
     .current-guess {
         gap: 0.8rem;
     }
-    
+
     .peg {
         width: 40px;
         height: 40px;
     }
-    
+
     .secret-code {
         gap: 0.8rem;
         padding: 0.8rem;
     }
-    
+
     .guesses-history {
-        margin: 0 0.5rem;
         max-height: 250px;
+        padding: 0.8rem;
     }
-    
+
     .guess-row {
         padding: 0.8rem;
         gap: 0.8rem;
     }
-    
+
     .guess-pegs {
         gap: 0.4rem;
     }
-    
+
     .feedback-pegs {
         min-width: 100px;
         padding: 0.4rem;
         gap: 0.4rem;
     }
-    
+
     .feedback-peg {
         width: 20px;
         height: 20px;
     }
-    
+
     .wordsearch-game {
         grid-template-columns: 1fr;
         padding: 1.5rem;
         margin: 0 0.5rem;
     }
-    
+
     .words-to-find {
         padding: 1rem;
     }
-    
+
     .grid-cell {
         width: 30px;
         height: 30px;
@@ -678,87 +724,88 @@ h2 {
     .container {
         padding: 0.5rem;
     }
-    
+
     h2 {
         font-size: 1.8rem;
     }
-    
+
     .game-card {
         padding: 1rem;
         margin: 0 0.25rem;
     }
-    
+
     .game-header h2 {
         font-size: 1.6rem;
     }
-    
+
     .game-controls {
         padding: 0.8rem;
         margin: 0 0.25rem;
     }
-    
+
     .game-info {
         margin: 0 0.25rem 1rem 0.25rem;
         padding: 0.8rem;
     }
-    
+
     .mastermind-game {
         margin: 0 0.25rem;
         padding: 1rem;
     }
-    
-    .left-panel, .right-panel {
+
+    .left-panel,
+    .right-panel {
         padding: 1rem;
     }
-    
+
     .color-option {
         width: 30px;
         height: 30px;
     }
-    
+
     .peg {
         width: 35px;
         height: 35px;
     }
-    
+
     .secret-code {
         gap: 0.6rem;
         padding: 0.6rem;
     }
-    
+
     .current-guess {
         gap: 0.6rem;
     }
-    
+
     .guesses-history {
-        margin: 0 0.25rem;
         max-height: 200px;
+        padding: 0.6rem;
     }
-    
+
     .guess-row {
         padding: 0.6rem;
         gap: 0.6rem;
     }
-    
+
     .feedback-pegs {
         min-width: 80px;
         padding: 0.3rem;
         gap: 0.3rem;
     }
-    
+
     .feedback-peg {
         width: 18px;
         height: 18px;
     }
-    
+
     .wordsearch-game {
         padding: 1rem;
         margin: 0 0.25rem;
     }
-    
+
     .grid-cell {
         width: 25px;
         height: 25px;
         font-size: 0.8rem;
     }
-} 
+}
